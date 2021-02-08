@@ -469,6 +469,15 @@ async function starts() {
 					buff = await getBuffer(anu.result)
 					client.sendMessage(from, buff, image, {quoted: mek})
 					break
+case 'bioskop':
+			data = await fetchJson(`http://docs-jojo.herokuapp.com/api/bioskop?kota=${body.slice(9)}`)
+		    	teks = '─────────────\n'
+					for (let i of data.result) {
+						teks += `➸ *Nama Bioskop* : ${i.title}\n➸ *Bintang* : ${i.bintang}\n➸ *Alamat :* ${i.alamat}\n\n➸ *Link* : ${i.url}\n─────────────\n`
+							}
+					buffs = await getBuffer(data.result[0].img)
+		client.sendMessage(from, buffs, image, {quoted: tod, caption: teks}) 	
+		  break
 				case 'tstiker':
 				case 'tsticker':
 					if (args.length < 1) return reply('Textnya mana um?')
